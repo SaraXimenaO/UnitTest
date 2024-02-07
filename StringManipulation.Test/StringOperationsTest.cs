@@ -82,8 +82,13 @@ namespace StringManipulation.Test
 
         public void RomanToNumber(string romanNumber, int expected)
         {
+            //Arrange
             var strOperations = new StringOperations();
+
+            //Act
             int result = strOperations.FromRomanToNumber(romanNumber);
+
+            //Assert
             Assert.Equal(expected, result);
         }
 
@@ -91,12 +96,31 @@ namespace StringManipulation.Test
 
         public void PruebaConMock()
         {
+            //Arrange
             var mockLogger = new Mock<ILogger<StringOperations>>();
             var strOperations = new StringOperations(mockLogger.Object);
 
+            //Act
             var result = strOperations.CountOccurrences("Sara", 'S');
 
+            //Assert
             Assert.Equal(result, 1);
+        }
+
+        [Fact]
+
+        public void deberia_leer_el_archivo()
+        {
+            //Arrange
+            var strOperations = new StringOperations();
+            var mockFileReader = new Mock<IFileReaderConector>();
+            mockFileReader.Setup(p => p.ReadString(It.IsAny<string>())).Returns("valor de prueba");
+            
+            //Act
+            var result = strOperations.ReadFile(mockFileReader.Object, "File.txt");
+
+            //Assert
+            Assert.Equal("valor de prueba", result);
         }
     }
 }
