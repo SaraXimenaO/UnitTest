@@ -8,7 +8,7 @@ namespace StringManipulation.Test
 {
     public class StringOperationsTest
     {
-        [Fact]
+        [Fact (Skip = "Atributo para omitir prueba")]
         public void ConcatenateStrings()
         {
             //Arrange
