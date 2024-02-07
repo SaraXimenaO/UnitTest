@@ -39,18 +39,20 @@ namespace StringManipulation.Test
 
         }
 
-        [Fact]
-        public void QuantityInWords()
+        [Theory]
+        [InlineData("cat", 10, "ten")]
+        [InlineData("dog", 5, "five")]
+        public void Deberia_devolver_el_numero_en_palabras_y_la_palabra(string word, int quantity,string  expected)
         {
             //Arrange
             var strOperations = new StringOperations();
 
             //Act
-            var result = strOperations.QuantintyInWords("cat", 10);
+            var result = strOperations.QuantintyInWords(word, quantity);
 
             //Assert
-            Assert.StartsWith("ten", result);
-            Assert.Contains("cat", result);
+            Assert.StartsWith(expected, result);
+            Assert.Contains(word, result);
         }
 
         [Fact]
