@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,6 +85,18 @@ namespace StringManipulation.Test
             var strOperations = new StringOperations();
             int result = strOperations.FromRomanToNumber(romanNumber);
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+
+        public void PruebaConMock()
+        {
+            var mockLogger = new Mock<ILogger<StringOperations>>();
+            var strOperations = new StringOperations(mockLogger.Object);
+
+            var result = strOperations.CountOccurrences("Sara", 'S');
+
+            Assert.Equal(result, 1);
         }
     }
 }
